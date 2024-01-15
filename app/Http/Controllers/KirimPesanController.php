@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Channels\WhacenterChannel;
+use App\Models\Member;
 use App\Models\User;
 use App\Notifications\KirimPesanMassal;
 use Illuminate\Http\Request;
@@ -16,6 +17,7 @@ class KirimPesanController extends Controller
     {
         return view('admin.kirimpesan_form',[
             'clientList' => User::where('akses','client')->get()->pluck('name_with_nohp','id'),
+            'desaList' => Member::distinct('desa')->pluck('desa'),
         ]);
     }
 
@@ -37,6 +39,7 @@ class KirimPesanController extends Controller
     {
         $request->validate([
             'client_id' => 'nullable',
+            'desa_id' => 'nullable',
             'pesan' => 'required',
             'channels' => 'required',
         ]);
@@ -45,13 +48,30 @@ class KirimPesanController extends Controller
             // array search and replace whatsapp
             $channels[array_search('whatsapp', $channels)] = WhacenterChannel::class;
         }
+        // Short by user client
         $users = User::where('akses', 'client');
         if ($request->client_id) {
             $users->where('id', $request->client_id);
+            $users->get()->each(function ($users) use ($request, $channels) {
+                $users->notify(new KirimPesanMassal($channels, $request->pesan));
+            });
         }
-        $users->get()->each(function ($users) use ($request, $channels) {
-            $users->notify(new KirimPesanMassal($channels, $request->pesan));
-        });
+        // Short by Desa
+        if ($request->desa_id != null) {
+            $desa = Member::whereNotNull('nohp');
+            $desa->where('desa', $request->desa_id);
+            $desa->get()->each(function ($desa) use ($request, $channels) {
+                $desa->notify(new KirimPesanMassal($channels, $request->pesan));
+            });
+        } else {
+            $users->get()->each(function ($users) use ($request, $channels) {
+                $users->notify(new KirimPesanMassal($channels, $request->pesan));
+            });
+        }
+
+        // $users->get()->each(function ($users) use ($request, $channels) {
+        //     $users->notify(new KirimPesanMassal($channels, $request->pesan));
+        // });
         flash('Pesan berhasil dikirim');
         return back();
     }

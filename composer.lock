@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db2cb5a49b7f903203cb824522a363ee",
+    "content-hash": "36b9157162143c35e9e0c64fe630d7cd",
     "packages": [
         {
             "name": "andes2912/indobank",
@@ -1584,6 +1584,69 @@
             "time": "2020-03-24T11:44:44+00:00"
         },
         {
+            "name": "kennedy-osaze/laravel-api-response",
+            "version": "v2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kennedy-osaze/laravel-api-response.git",
+                "reference": "017eb5864160ce311173647a8aab12ddf9e81f32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kennedy-osaze/laravel-api-response/zipball/017eb5864160ce311173647a8aab12ddf9e81f32",
+                "reference": "017eb5864160ce311173647a8aab12ddf9e81f32",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^10.0",
+                "illuminate/translation": "^10.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "kennedy-osaze/php-cs-fixer-config": "^2.0.1",
+                "nunomaduro/collision": "^7.0",
+                "orchestra/testbench": "^8.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "KennedyOsaze\\LaravelApiResponse\\LaravelApiResponseServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "KennedyOsaze\\LaravelApiResponse\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kennedy Osaze",
+                    "email": "me.osaze@gmail.com",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Renders consistent HTTP JSON responses for API-based projects",
+            "homepage": "https://github.com/kennedy-osaze/laravel-api-response",
+            "keywords": [
+                "api",
+                "json",
+                "laravel",
+                "response"
+            ],
+            "support": {
+                "issues": "https://github.com/kennedy-osaze/laravel-api-response/issues",
+                "source": "https://github.com/kennedy-osaze/laravel-api-response/tree/v2.0"
+            },
+            "time": "2023-03-19T23:37:51+00:00"
+        },
+        {
             "name": "knplabs/knp-snappy",
             "version": "v1.4.2",
             "source": {
@@ -1859,16 +1922,16 @@
         },
         {
             "name": "laravel/sanctum",
-            "version": "v3.2.5",
+            "version": "v3.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sanctum.git",
-                "reference": "8ebda85d59d3c414863a7f4d816ef8302faad876"
+                "reference": "217e8a2bc5aa6a827ced97fcb76504029d3115d7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sanctum/zipball/8ebda85d59d3c414863a7f4d816ef8302faad876",
-                "reference": "8ebda85d59d3c414863a7f4d816ef8302faad876",
+                "url": "https://api.github.com/repos/laravel/sanctum/zipball/217e8a2bc5aa6a827ced97fcb76504029d3115d7",
+                "reference": "217e8a2bc5aa6a827ced97fcb76504029d3115d7",
                 "shasum": ""
             },
             "require": {
@@ -1881,9 +1944,9 @@
             },
             "require-dev": {
                 "mockery/mockery": "^1.0",
-                "orchestra/testbench": "^7.0|^8.0",
+                "orchestra/testbench": "^7.28.2|^8.8.3",
                 "phpstan/phpstan": "^1.10",
-                "phpunit/phpunit": "^9.3"
+                "phpunit/phpunit": "^9.6"
             },
             "type": "library",
             "extra": {
@@ -1921,7 +1984,7 @@
                 "issues": "https://github.com/laravel/sanctum/issues",
                 "source": "https://github.com/laravel/sanctum"
             },
-            "time": "2023-05-01T19:39:51+00:00"
+            "time": "2023-08-22T13:21:11+00:00"
         },
         {
             "name": "laravel/serializable-closure",

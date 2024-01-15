@@ -1375,8 +1375,8 @@ p {
   color: var(--dark-3);
   font-size: 20px;
   position: absolute;
-  left: 0;
-  top: 6px;
+  left: -15px;
+  top: 10px;
 }
 .pricing-style-fourteen .duration {
   display: inline-block;

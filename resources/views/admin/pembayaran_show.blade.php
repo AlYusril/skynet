@@ -45,10 +45,10 @@
                                 <td>Total Tagihan</td>
                                 <td>: {{ formatRupiah($model->tagihan->tagihanDetails->sum('jumlah_biaya')) }}</td>
                             </tr>
-                            <tr>
+                            {{-- <tr>
                                 <td>Cetak Invoice</td>
                                 <td>: <a href="{{ route('invoice.show' , $model->tagihan_id) }}" target="_blank"><i class="fa fa-print"></i> Invoice</a></td>
-                            </tr>
+                            </tr> --}}
                         </thead>
                     </table>
                 </div>

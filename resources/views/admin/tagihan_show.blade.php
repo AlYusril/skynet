@@ -72,7 +72,7 @@
                 </div>
                 <div class="form-group">
                     <label for="jumlah_dibayar">Jumlah Yang Dibayarkan</label>
-                    {!! Form::text('jumlah_dibayar', $tagihan->total_tagihan, ['class' => 'form-control rupiah']) !!}
+                    {!! Form::text('jumlah_dibayar', ($tagihan->total_tagihan - ($tagihan->total_pembayaran ?? 0)), ['class' => 'form-control rupiah']) !!}
                     {{-- {!! Form::text('jumlah_dibayar', null, ['class' => 'form-control rupiah']) !!} --}}
                     <span class="text-danger">{{ $errors->first('jumlah_dibayar') }}</span>
                 </div>
@@ -138,7 +138,7 @@
                                 <th>No</th>
                                 <th>Bulan Tagihan</th>
                                 <th>Jumlah Tagihan</th>
-                                <th>Paraf</th>
+                                <th>Jumlah Dibayar</th>
                                 <th>Keterangan</th>
                             </tr>
                         </thead>
@@ -154,12 +154,12 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <a href="{{ route('kartumember.index',[
+                    {{-- <a href="{{ route('kartumember.index',[
                         'member_id' => $member->id,
                         'tahun' => request('tahun'),
                         ]) }}" 
                         class="btn btn-sm" target="_blank"><i class="fa fa-print mt-2"></i> Cetak Kartu {{ request('tahun') }}
-                    </a>
+                    </a> --}}
                 </div>
             </div>
         </div>

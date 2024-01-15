@@ -82,24 +82,24 @@ class SkyMemberPembayaranController extends Controller
         ];
 
         // Validasi pembayaran harus lunass
-        // $tagihan = Tagihan::findOrFail($request->tagihan_id);
-        // if ($jumlahDibayar >= $tagihan->total_tagihan) {
-        //     DB::beginTransaction();
-        //     try {
-        //         $pembayaran = Pembayaran::create($dataPembayaran);
-        //         $userAdmin = User::where('akses', 'admin')->get();
-        //         Notification::send($userAdmin, new PembayaranNotification($pembayaran));
-        //         DB::commit();
-        //     } catch (\Throwable $th) {
-        //         DB::rollback();
-        //         flash()->addError('Gagal menyimpan data pembayaran, ' . $th->getMessage());
-        //         return back();
-        //     }
-        // } else {
-        //     DB::rollBack();
-        //     flash()->addError('Jumlah pembayaran tidak boleh kurang dari total tagihan');
-        //     return back();
-        // }
+        $tagihan = Tagihan::findOrFail($request->tagihan_id);
+        if ($jumlahDibayar >= $tagihan->total_tagihan) {
+            DB::beginTransaction();
+            try {
+                $pembayaran = Pembayaran::create($dataPembayaran);
+                $userAdmin = User::where('akses', 'admin')->get();
+                Notification::send($userAdmin, new PembayaranNotification($pembayaran));
+                DB::commit();
+            } catch (\Throwable $th) {
+                DB::rollback();
+                flash()->addError('Gagal menyimpan data pembayaran, ' . $th->getMessage());
+                return back();
+            }
+        } else {
+            DB::rollBack();
+            flash()->addError('Jumlah pembayaran tidak boleh kurang dari total tagihan');
+            return back();
+        }
 
         // Koding awal tanpa harus lunas
         DB::beginTransaction();

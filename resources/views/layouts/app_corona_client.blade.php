@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('corona') }}/assets/vendors/flag-icon-css/css/flag-icon.min.css">
     <link rel="stylesheet" href="{{ asset('corona') }}/assets/vendors/owl-carousel-2/owl.carousel.min.css">
     <link rel="stylesheet" href="{{ asset('corona') }}/assets/vendors/owl-carousel-2/owl.theme.default.min.css">
+    <link rel="stylesheet" href="{{ asset('corona') }}/assets/vendors/select2/select2.min.css">
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <!-- endinject -->
@@ -33,6 +34,18 @@
         background-color: rgb(54, 58, 61) !important;
         color: white;
         padding: 10px;
+      }
+
+      /* Mengubah warna teks menjadi putih saat mengetik di form */
+      .form-group label,
+        .form-control {
+        color: #fff;
+        }
+      .form-control:focus {
+        color: #fff;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
       }
     </style>
     <script>
@@ -67,7 +80,7 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
           {{-- <span class="sidebar-brand brand-logo font-weight-bold text-white">SKYNET</span> --}}
-          <a class="sidebar-brand brand-logo" href="{{ route('client.beranda') }}"><img src="{{ \Storage::url(settings()->get('app_logo')) }}" alt="logo"/></a>
+          <a class="sidebar-brand brand-logo" href="{{ route('admin.beranda') }}"><img src="{{ \Storage::url(settings()->get('app_logo')) ?? 'assets\logo.png' }}" style="width: 90px; height:auto;" alt="logo"/></a>
           <a class="sidebar-brand brand-logo-mini" href="{{ route('client.beranda') }}"><h2 class="font-weight-bold text-white">S</h2></a>
         </div>
         <ul class="nav">
@@ -150,23 +163,23 @@
             </a>
           </li>
 
-          <li class="nav-item menu-items {{ \Route::is('client.profil.*') ? 'active' : '' }}">
+          {{-- <li class="nav-item menu-items {{ \Route::is('client.profil.*') ? 'active' : '' }}">
             <a href="{{ route('client.profil.create') }}" class="nav-link">
               <span class="menu-icon">
                 <i class="mdi mdi-contacts"></i>
               </span>
               <span class="menu-title">Setting Profil</span>
             </a>
-          </li>
+          </li> --}}
           
-          {{-- <li class="nav-item menu-items">
-            <a href="{{ route('client.pembayaran.index') }}" class="nav-link" href="{{ asset('corona') }}/pages/icons/mdi.html">
+          <li class="nav-item menu-items {{ Route::is('client.laporkerusakan.*') ? 'active' : '' }}">
+            <a href="{{ route('client.laporkerusakan.index') }}" class="nav-link">
               <span class="menu-icon">
                 <i class="mdi mdi-contacts"></i>
               </span>
-              <span class="menu-title">Data Pembayaran</span>
+              <span class="menu-title">Lapor Kerusakan</span>
             </a>
-          </li> --}}
+          </li>
         </ul>
       </nav>
       <!-- partial -->
@@ -174,7 +187,10 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar p-0 fixed-top d-flex flex-row">
           <div class="navbar-brand-wrapper d-flex d-lg-none align-items-center justify-content-center">
-            <a class="sidebar-brand brand-logo-mini" href="{{ route('client.beranda') }}"><h2 class="font-weight-bold text-white">S</h2></a>
+            <a class="navbar-brand brand-logo-mini" href="{{ route('client.beranda') }}">
+              {{-- <img src="{{ \Storage::url(settings()->get('app_logo')) }}" alt="logo" width="120"/> --}}
+              <h3 class="text-white">Sky</h3>
+            </a>
           </div>
           <div class="navbar-menu-wrapper flex-grow d-flex align-items-stretch">
             <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -182,16 +198,19 @@
             </button>
             <ul class="navbar-nav w-100">
               <li class="nav-item w-100">
-                {!! Form::open(['route' => 'client.tagihan.index', 'method' => 'GET']) !!}
+                {{-- {!! Form::open(['route' => 'client.tagihan.index', 'method' => 'GET']) !!}
                 <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
                   <input name="q" type="text" class="form-control" placeholder="Pencarian Data Member" value="{{ request('q') }}">
                 </form>
-                {!! Form::close() !!}
+                {!! Form::close() !!} --}}
+                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" action="{{ route('client.tagihan.index') }}" method="GET">
+                  <input type="text" class="form-control" name="q" placeholder="cari data tagihan" value="{{ request('q') }}">
+                </form>
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-right">
               
-              <li class="nav-item dropdown border-left">
+              {{-- <li class="nav-item dropdown border-left">
                 <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="{{ asset('corona') }}/#" data-toggle="dropdown" aria-expanded="false">
                   <i class="mdi mdi-email"></i>
                   <span class="count bg-success"></span>
@@ -231,7 +250,7 @@
                   <div class="dropdown-divider"></div>
                   <p class="p-3 mb-0 text-center">4 new messages</p>
                 </div>
-              </li>
+              </li> --}}
               <li class="nav-item dropdown border-left">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="{{ asset('corona') }}/#" data-toggle="dropdown">
                   <i class="mdi mdi-bell"></i>
@@ -351,8 +370,11 @@
     <!-- Custom js for this page -->
     <script src="{{ asset('corona') }}/assets/js/dashboard.js"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- Custom Select2 --}}
+    <script src="{{ asset('corona') }}/assets/vendors/select2/select2.min.js"></script>
+
+    {{-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
     <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
     <script>
       $(document).ready(function() {

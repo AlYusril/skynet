@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "imtigger/laravel-job-status": "^1.2",
         "imtigger/laravel-job-status-progress-view": "^1.0",
+        "kennedy-osaze/laravel-api-response": "^2.0",
         "laravel/framework": "^10.0",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",

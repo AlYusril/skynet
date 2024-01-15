@@ -14,7 +14,7 @@ class LandingPageController extends Controller
      */
     public function index()
     {
-        $models = Biaya::has('children')->whereNull('parent_id')->get();
+        $models = Biaya::has('children')->whereNull('parent_id')->where('status', 'promo')->get();
         return view('landing_page', [
             'listBiaya' => $models->pluck('nama', 'id'),
             'title' => 'Landing Page',
@@ -23,6 +23,19 @@ class LandingPageController extends Controller
             'services' => Landingpage::where('jenis', 'services')->get(),
             'berita' => Landingpage::where('jenis', 'berita')->get(),
             'slider' => Landingpage::where('jenis', 'slider')->get(),
+        ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function paketData()
+    {
+        $models = Biaya::has('children')->whereNull('parent_id')->where('status_paket', 'aktif')->get();
+        return view('paket_internet_list', [
+            'listBiaya' => $models->pluck('nama', 'id'),
+            'title' => 'List Paket Data',
+            'models' => $models,
         ]);
     }
 
@@ -60,14 +73,17 @@ class LandingPageController extends Controller
             . "Paket: " . $paket . "%0A"
             . "Alamat: " . urlencode($alamat);
 
-        // if ($request->has('nohp')) {
-        //     $ws = new WhacenterService();
-        //     $ws->line("Hai Sobat, terimakasih sudah menghubungi ". Settings('app_name'))
-        //     ->line("berikut data diri anda, apakah sudah benar?")
-        //     ->line($pesan)
-        //     ->line("jika sudah benar balas" . '"IYA"' . "dan team kami akan segera menuju lokasi anda")
-        //     ->to($request->nohp)->send();
-        // }
+        if ($request->has('nohp')) {
+            $pesanWa = str_replace('Daftar Pasang Baru%0A', '', $pesan);
+            $pesanWa = str_replace('+', '', $pesanWa);
+            $ws = new WhacenterService();
+            $ws->line("Hai Sobat, terimakasih sudah menghubungi *". Settings('app_name').'*')
+            ->line("Berikut data diri anda, apakah sudah benar?".PHP_EOL)
+            ->line(str_replace('%0A', PHP_EOL, $pesanWa).PHP_EOL)
+            ->line("Jika sudah benar balas" . '"*IYA*"' . " team kami akan segera menuju lokasi anda")
+            ->line("Terima Kasih")
+            ->to($request->nohp)->send();
+        }
         
         $pesanWa = "https://wa.me/". Settings('app_phone'). '?text='. $pesan;
         return redirect()->away($pesanWa);

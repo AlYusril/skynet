@@ -19,11 +19,12 @@ class BiayaController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->filled('q')) {
-            $models = Model::with('user')->whereNull('parent_id')->search($request->q)->paginate(settings()->get('app_pagination', '50'));
-        }else {
-            $models = Model::with('user')->whereNull('parent_id')->latest()->paginate(settings()->get('app_pagination', '50'));
-        }
+        // if ($request->filled('q')) {
+        //     $models = Model::with('user')->whereNull('parent_id')->search($request->q)->paginate(settings()->get('app_pagination', '50'));
+        // }else {
+        //     $models = Model::with('user')->whereNull('parent_id')->latest()->paginate(settings()->get('app_pagination', '50'));
+        // }
+        $models = Model::with('user')->whereNull('parent_id')->latest()->paginate(settings()->get('app_pagination', '50'));
         return view('admin.' . $this->viewIndex, [
             'models' => $models,
             'routePrefix' =>$this->routePrefix,

@@ -13,12 +13,10 @@
                 
                 <div class="form-group mt-1">
                     <label for="bank_id">Nama Bank</label>
-                    {{-- {!! Form::select('bank_id', $listBank, null, ['class' => 'form-control select2']) !!} --}}
                     @if($method === 'POST')
                         {!! Form::select('bank_id', $listBank, null, ['class' => 'form-control select2']) !!}
                     @else
-                        {{-- {!! Form::select('bank_id', [$model->bank_id => $model->nama_bank], $model->bank_id, ['class' => 'form-control', 'readonly']) !!} --}}
-                        {!! Form::select('bank_id', $listBank, $model->bank_id, ['class' => 'form-control select2']) !!}
+                        {!! Form::select('bank_id', [$model->bank_id => $model->nama_bank], $model->bank_id, ['class' => 'form-control', 'readonly']) !!}
                     @endif
                     <span class="text-danger">{{ $errors->first('bank_id') }}</span>
                 </div>

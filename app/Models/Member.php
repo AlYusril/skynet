@@ -18,6 +18,7 @@ class Member extends Model
     use SearchableTrait;
     use HasStatuses;
     protected $guarded =[];
+    // protected $appends = ['foto_url'];
     protected $searchable = [
         'columns' => [
             'nama' => 10,

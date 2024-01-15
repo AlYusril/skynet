@@ -18,6 +18,19 @@
     <link rel="stylesheet" href="{{ asset('corona') }}/assets/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('corona') }}/assets/images/favicon.png" />
+    <style>
+       /* Mengubah warna teks menjadi putih saat mengetik di form */
+       .form-group label,
+        .form-control {
+        color: #fff;
+        }
+      .form-control:focus {
+        color: #fff;
+        border-color: #80bdff;
+        outline: 0;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+    </style>
   </head>
   <body>
     @yield('content')

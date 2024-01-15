@@ -27,14 +27,14 @@
     <div class="col-sm-3 grid-margin">
         <div class="card">
             <div class="card-body">
-                <h5>Total Member</h5>
+                <h5>Tagihan Belum dibayar</h5>
                 <div class="row">
                     <div class="col-8 col-sm-12 col-xl-8 my-auto">
                         <div class="d-flex d-sm-block d-md-flex align-items-center">
-                            <h2 class="mb-0">{{ auth()->user()->member->count() }}</h2>
+                            <h2 class="mb-0">{{ $tagihan->count() }}</h2>
                             {{-- <p class="text-success ml-2 mb-0 font-weight-medium">+8.3%</p> --}}
                         </div>
-                        <h6 class="text-muted font-weight-normal"> Data Member</h6>
+                        <h6 class="text-muted font-weight-normal"> Tagihan</h6>
                     </div>
                     <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
                         <i class="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>

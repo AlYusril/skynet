@@ -6,6 +6,7 @@ use App\Http\Controllers\BankSkynetController;
 use App\Http\Controllers\BerandaAdminController;
 use App\Http\Controllers\BerandaClientController;
 use App\Http\Controllers\BiayaController;
+use App\Http\Controllers\BiayaUpdateStatus;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ClientMemberController;
 use App\Http\Controllers\ClientNotifikasiController;
@@ -17,6 +18,7 @@ use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\LaporanFormController;
 use App\Http\Controllers\LaporanPembayaranController;
 use App\Http\Controllers\LaporanTagihanController;
+use App\Http\Controllers\LaporKerusakanController;
 use App\Http\Controllers\LogActivityController;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\MemberImportController;
@@ -32,6 +34,7 @@ use App\Http\Controllers\SettingSponsorController;
 use App\Http\Controllers\SettingWhacenterController;
 use App\Http\Controllers\SkyMemberController;
 use App\Http\Controllers\SkyMemberInvoiceController;
+use App\Http\Controllers\SkyMemberLaporKerusakanController;
 use App\Http\Controllers\SkyMemberPembayaranController;
 use App\Http\Controllers\SkyMemberProfileController;
 use App\Http\Controllers\SkyMemberTagihanController;
@@ -70,6 +73,7 @@ Route::get('login/login-url', [LoginController::class, 'loginUrl'])->name('login
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing_page');
 Route::resource('landingpage', LandingPageController::class);
+Route::get('/paket-data', [LandingPageController::class, 'paketData'])->name('paket.data');
 // Route::post('send-message', 'LandingPageController@store')->name('send-message');
 
 Auth::routes();
@@ -94,6 +98,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.admin'])->group(function () {
     Route::get('status/update', [StatusController::class, 'update'])->name('status.update');
     Route::resource('notifikasi', AdminNotifikasiController::class);
     Route::resource('kirimpesan', KirimPesanController::class);
+    Route::resource('laporkerusakan', LaporKerusakanController::class);
     // Setting Landing Page
     Route::resource('sponsor', SettingSponsorController::class);
     Route::resource('services', SettingServicesController::class);
@@ -106,6 +111,7 @@ Route::prefix('admin')->middleware(['auth', 'auth.admin'])->group(function () {
     Route::get('rekappembayaran', [RekapPembayaranController::class, 'index'])->name('rekappembayaran.index');
     // invoke
     Route::post('tagihanupdatelunas', TagihanUpdateLunas::class)->name('tagihanupdate.lunas');
+    Route::post('biayaupdatestatus', BiayaUpdateStatus::class)->name('biayaupdate.status');
     Route::resource('logactivity', LogActivityController::class);
     Route::resource('jobstatus', JobStatusController::class);
     Route::post('memberimport', MemberImportController::class)->name('memberimport.store');
@@ -122,6 +128,7 @@ Route::prefix('client')->middleware(['auth', 'auth.client'])->name('client.')->g
     Route::resource('tagihan', SkyMemberTagihanController::class);
     Route::resource('pembayaran', SkyMemberPembayaranController::class);
     Route::resource('profil', SkyMemberProfileController::class);
+    Route::resource('laporkerusakan', SkyMemberLaporKerusakanController::class);
     Route::resource('notifikasi', ClientNotifikasiController::class);
 });
 Route::get('kartumember', [KartuSppController::class, 'index'])->name('kartumember.index')->middleware('auth');

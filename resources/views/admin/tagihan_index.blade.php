@@ -102,7 +102,7 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
-                <button type="button" id="btn-lunas" class="btn btn-success btn-sm mt-3">Bayar Lunas</button>
+                <button type="button" id="btn-lunas" class="btn btn-info btn-sm mt-3">Bayar Lunas</button>
                 <div class="table-responsive mt-3">
                     <table class="{{ config('app.table_style') }}">
                         <thead class="{{ config('app.thead_style') }}">
@@ -114,6 +114,7 @@
                             <th>Tanggal Tagihan</th>
                             <th>Status</th>
                             <th>Total Tagihan</th>
+                            <th>Dibayar</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -131,6 +132,7 @@
                                     <span class="badge badge-outline-{{ $item->status_style }}">{{ $item->status }}</span>
                                 </td>
                                 <td>{{ formatRupiah($item->tagihanDetails->sum('jumlah_biaya')) }}</td>
+                                <td>{{ formatRupiah($item->total_pembayaran) }}</td>
 
                                 <td class="text-center">
                                     {!! Form::open([

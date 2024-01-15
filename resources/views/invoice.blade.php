@@ -1,3 +1,8 @@
+<script>
+            window.onload = function() {
+                window.print();
+            };
+        </script>
 @extends('layouts.app_corona_blank')
 @section('content')
 
@@ -131,7 +136,7 @@ hr {
             </small>
         </h1>
 
-        <div class="page-tools">
+        {{-- <div class="page-tools">
             <div class="action-buttons">
                 <a class="btn bg-white btn-light mx-1px text-95" href="#" onclick="window.print()" data-title="Print">
                     <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
@@ -142,7 +147,7 @@ hr {
                     Export
                 </a>
             </div>
-        </div>
+        </div> --}}
     </div>
 
     <div class="container px-0">
@@ -184,8 +189,8 @@ hr {
 
                             <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">ID:</span> {{ $tagihan->id }}</div>
 
-                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Issue Date:</span> {{ $tagihan->tanggal_tagihan->translatedFormat('d F Y') }}</div>
-                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Issue Date:</span> {{ $tagihan->tanggal_jatuh_tempo->translatedFormat('d F Y') }}</div>
+                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Tanggal Tagihan:</span> {{ $tagihan->tanggal_tagihan->translatedFormat('d F Y') }}</div>
+                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Tanggal Jatuh Tempo:</span> {{ $tagihan->tanggal_jatuh_tempo->translatedFormat('d F Y') }}</div>
 
                             <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Status:</span> <span class="badge badge-warning badge-pill px-25">{{ $tagihan->status }}</span></div>
                         </div>
@@ -259,7 +264,7 @@ hr {
 
                     <div>
                         <span class="text-secondary-d1 text-105">Thank you for your business</span>
-                        <a href="#" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Pay Now</a>
+                        {{-- <a href="#" class="btn btn-info btn-bold px-4 float-right mt-3 mt-lg-0">Pay Now</a> --}}
                     </div>
                 </div>
             </div>

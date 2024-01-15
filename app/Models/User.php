@@ -36,6 +36,7 @@ class User extends Authenticatable
         'akses',
         'nohp',
         'nohp_verified_at',
+        'fcm_token'
     ];
 
     /**
@@ -46,6 +47,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'fcm_token'
     ];
 
     /**

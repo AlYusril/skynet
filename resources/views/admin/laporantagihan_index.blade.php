@@ -19,6 +19,7 @@
                                     <th>Tanggal Tagihan</th>
                                     <th>Status</th>
                                     <th>Total Tagihan</th>
+                                    <th>Jumlah Dibayar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -30,6 +31,7 @@
                                         <td>{{ $item->tanggal_tagihan->translatedFormat('d-M-Y') }}</td>
                                         <td>{{ $item->status }}</td>
                                         <td class="text-right">{{ formatRupiah($item->tagihanDetails->sum('jumlah_biaya')) }}</td>
+                                        <td>{{ formatRupiah($item->total_pembayaran) }}</td>
                                     </tr>
                                 @empty
                                     <tr>

@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -81,5 +82,24 @@ class LoginController extends Controller
             flash()->addError('Anda tidak memiliki hak akses');
             return redirect()->route('login');
         }
+    }
+
+    protected function loginApi(Request $request) {
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'fcm_token' => 'nullable',
+        ]);
+        
+        if (Auth::attempt($request->only('email', 'password'))) {
+            if ($request->filled('fcm_token')) {
+                Auth::user()->update(['fcm_token' => $request->fcm_token]);
+            }
+            $token = Auth::user()->createToken('authToken')->plainTextToken;
+            $user = array_merge(Auth::user()->toArray(), ['token' => $token]);
+            return $this->okResponse("Login berhasil", $user);
+        }
+
+        return $this->unauthenticatedResponse('Login gagal');
     }
 }

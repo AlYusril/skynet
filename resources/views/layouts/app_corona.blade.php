@@ -235,6 +235,14 @@
               <span class="menu-title">Kirim Pesan</span>
             </a>
           </li>
+          <li class="nav-item menu-items {{ \Route::is('laporkerusakan.*') ? 'active' : '' }}">
+            <a href="{{ route('laporkerusakan.index') }}" class="nav-link">
+              <span class="menu-icon">
+                <i class="mdi mdi-whatsapp"></i>
+              </span>
+              <span class="menu-title">Laporan Kerusakan</span>
+            </a>
+          </li>
           <li class="nav-item menu-items {{ \Route::is('biaya.*') ? 'active' : '' }}">
             <a href="{{ route('biaya.index') }}" class="nav-link">
               <span class="menu-icon">
@@ -260,9 +268,9 @@
                 <i class="mdi mdi-cash-multiple"></i>
               </span>
               <span class="menu-title">Administrasi</span>
-              <span class="badge badge-pill badge-danger" style="margin-left: 5px;">
+              {{-- <span class="badge badge-pill badge-danger" style="margin-left: 5px;">
                 {{ auth()->user()->unreadNotifications->count() }}
-              </span>
+              </span> --}}
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="icons">
@@ -284,7 +292,7 @@
                 </div>
             </a>
           </li>
-          <li class="nav-item menu-items {{ \Route::is('logactivity.index') ? 'active' : '' }}">
+          {{-- <li class="nav-item menu-items {{ \Route::is('logactivity.index') ? 'active' : '' }}">
             <a href="{{ route('logactivity.index') }}" class="nav-link">
                 <div class="d-flex align-items-center">
                     <span class="menu-icon">
@@ -293,7 +301,7 @@
                     <div class="menu-title">Log</div>
                 </div>
             </a>
-          </li>
+          </li> --}}
         </ul>
       </nav>
       <!-- partial -->
@@ -312,11 +320,9 @@
             </button>
             <ul class="navbar-nav w-100">
               <li class="nav-item w-100">
-            {!! Form::open(['route' => 'tagihan.index', 'method' => 'GET']) !!}
-                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search">
-                  <input type="text" class="form-control" name="q" placeholder="Cari data tagihan" value="{{ request('q') }}">
+                <form class="nav-link mt-2 mt-md-0 d-none d-lg-flex search" action="{{ route('tagihan.index') }}" method="GET">
+                  <input type="text" class="form-control" name="q" placeholder="cari data tagihan" value="{{ request('q') }}">
                 </form>
-            {!! Form::close() !!}
               </li>
             </ul>
             <ul class="navbar-nav navbar-nav-right">
@@ -361,12 +367,12 @@
                   <p class="p-3 mb-0 text-center">See all projects</p>
                 </div>
               </li>
-              <li class="nav-item nav-settings d-none d-lg-block">
+              {{-- <li class="nav-item nav-settings d-none d-lg-block">
                 <a class="nav-link" href="{{ asset('corona') }}/#">
                   <i class="mdi mdi-view-grid"></i>
                 </a>
-              </li>
-              <li class="nav-item dropdown border-left">
+              </li> --}}
+              {{-- <li class="nav-item dropdown border-left">
                 <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="{{ asset('corona') }}/#" data-toggle="dropdown" aria-expanded="false">
                   <i class="mdi mdi-email"></i>
                   <span class="count bg-success"></span>
@@ -406,7 +412,7 @@
                   <div class="dropdown-divider"></div>
                   <p class="p-3 mb-0 text-center">4 new messages</p>
                 </div>
-              </li>
+              </li> --}}
               <li class="nav-item dropdown border-left">
                 <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="{{ asset('corona') }}/#" data-toggle="dropdown">
                     <i class="mdi mdi-bell"></i>
@@ -454,9 +460,9 @@
                   </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
-                  <h6 class="p-3 mb-0">Profile</h6>
+                  {{-- <h6 class="p-3 mb-0">Profile</h6> --}}
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item preview-item">
+                  {{-- <a class="dropdown-item preview-item">
                     <div class="preview-thumbnail">
                       <div class="preview-icon bg-dark rounded-circle">
                         <i class="mdi mdi-settings text-success"></i>
@@ -465,7 +471,7 @@
                     <div class="preview-item-content">
                       <p class="preview-subject mb-1">Settings</p>
                     </div>
-                  </a>
+                  </a> --}}
                   <div class="dropdown-divider"></div>
                   <a href="{{ route('logout') }}" class="dropdown-item preview-item">
                     <div class="preview-thumbnail">
@@ -478,7 +484,7 @@
                     </div>
                   </a>
                   <div class="dropdown-divider"></div>
-                  <p class="p-3 mb-0 text-center">Advanced settings</p>
+                  {{-- <p class="p-3 mb-0 text-center">Advanced settings</p> --}}
                 </div>
               </li>
             </ul>

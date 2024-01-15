@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ClientMemberCollection;
+use App\Http\Resources\ClientMemberResource;
 use App\Models\Member;
+use App\Models\Tagihan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BerandaClientController extends Controller
 {
@@ -62,7 +66,21 @@ class BerandaClientController extends Controller
         }
         $data['dataRekap'] = $dataRekap;
         $data['header'] = bulanTagihan();
+        $memberId = Auth::user()->member()->pluck('id');
+        // dd($membersId);
+        $tagihan = Tagihan::whereIn('member_id', $memberId)->get();
+        $data['tagihan'] = $tagihan->where('status', '<>', 'lunas');
+        // dd($tagihan);
 
+        if (request()->wantsJson()) {
+            return response()->json($data, 200);
+        }
         return view('client.beranda_index', $data);
+    }
+
+    public function indexApi() {
+        $member = Member::with('tagihan')->where('client_id', auth()->user()->id)
+        ->orderBy('nama', 'asc')->first();
+        return $this->successResponse("Data sudah disimpan");
     }
 }

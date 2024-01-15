@@ -29,7 +29,7 @@ class TagihanController extends Controller
      */
     public function index(Request $request)
     {
-        $models = Model::latest();
+        $models = Model::latest('tanggal_tagihan');
         if ($request->filled('q')) {
             $models = $models->search($request->q, null, true);
         }
@@ -45,7 +45,6 @@ class TagihanController extends Controller
         if ($request->filled('status')) {
             $models = $models->where('status', $request->status);
         }
-
         return view('admin.' . $this->viewIndex, [
             'models' => $models->paginate(settings()->get('app_pagination', '50')),
             'routePrefix' =>$this->routePrefix,

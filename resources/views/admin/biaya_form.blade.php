@@ -64,7 +64,7 @@
                         <label for="keterangan">Berita</label>
                         {!! Form::textarea('keterangan', null, [
                             'class' => 'form-control',
-                            'rows' => 5,
+                            'rows' => 2,
                         ]) !!}
                         <span class="text-danger">{{ $errors->first('keterangan') }}</span>
                     </div>

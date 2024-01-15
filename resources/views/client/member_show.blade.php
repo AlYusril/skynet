@@ -98,10 +98,12 @@
                                     <td class="text-center font-weight-bold">{{ formatRupiah($model->biaya->children->sum('jumlah')) }}</td>
                                 </tfoot>
                             </table>
-                            <a href="{{ route('kartumember.index', [
+                            {{-- <a href="{{ route('kartumember.index', [
                                 'member_id' => $model->id,
                                 'tahun' => date('Y'),
-                            ]) }}" target="_blank"><i class="fa fa-print"></i> Kartu Tagihan Pelanggan</a>
+                                ]) }}" target="_blank">
+                                <i class="fa fa-print"></i> Kartu Tagihan Pelanggan
+                            </a> --}}
                         </div>
                     </div>
             </div>

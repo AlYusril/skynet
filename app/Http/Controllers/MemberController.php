@@ -26,6 +26,10 @@ class MemberController extends Controller
         if ($request->filled('q')) {
             $models = $models->search($request->q);
         }
+
+        if ($request->wantsJson()) {
+            return response()->json($models->get(), 200);
+        }
         // return response()->json($models->paginate(50));
         return view('admin.' . $this->viewIndex, [
             'models' => $models->paginate(settings()->get('app_pagination', '50')),

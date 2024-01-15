@@ -80,7 +80,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="card-title">
-                  <h4 class="m-0 me-2">Tagihan Bulan {{ $bulan }} {{ $tahun }}</h4>
+                  <h4 class="m-0 me-2">Tagihan Lunas Bulan {{ $bulan }} {{ $tahun }}</h4>
                   <small class="text-muted">{{ date('d F Y H:i:s') }}</small>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">

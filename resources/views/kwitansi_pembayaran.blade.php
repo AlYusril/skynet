@@ -4,15 +4,15 @@
 		<meta charset="utf-8" />
 		<title>{{ $title ?? '' }} {{ settings()->get('app_name', 'My APP') }}</title>
 
-        {{-- <script>
+        <script>
             window.onload = function() {
                 window.print();
             };
-        </script> --}}
+        </script>
 
 		<style>
 			.invoice-box {
-				max-width: 800px;
+				max-width: 650px;
 				margin: auto;
 				padding: 30px;
 				border: 1px solid #eee;
@@ -122,7 +122,8 @@
 								</td>
 
 								<td>
-									Invoice #: {{ $pembayaran->id }}<br />
+									STRUK PEMBAYARAN TAGIHAN INTERNET
+									{{-- Invoice #: {{ $pembayaran->id }}<br /> --}}
 									{{-- Created: {{ $pembayaran->tanggal_tagihan->translatedFormat('d F Y') }}<br />
 									Due: {{ $pembayaran->tanggal_jatuh_tempo->translatedFormat('d F Y') }} --}}
 								</td>
@@ -142,9 +143,10 @@
 								</td>
 
 								<td>
+									{{ $pembayaran->tagihan->member->idpel }}<br />
 									{{ $pembayaran->tagihan->member->nama }}<br />
-									{{ $pembayaran->tagihan->member->alamat_lengkap }}<br />
-									{{ formatNomorHp($pembayaran->tagihan->member->nohp) }}
+									{{ $pembayaran->tagihan->tanggal_lunas->format('d F Y') }}<br />
+									{{-- {{ formatNomorHp($pembayaran->tagihan->member->nohp) }} --}}
 								</td>
 							</tr>
 						</table>
@@ -154,9 +156,9 @@
 				<tr class="heading">
 					<td width="2%" style="text-align: center">No</td>
 
-					<td style="text-align: start">Item</td>
+					<td style="text-align: center">Item</td>
 
-					<td>Sub-Total</td>
+					<td style="text-align: center">Sub-Total</td>
 				</tr>
 
 				@foreach ($pembayaran->tagihan->tagihanDetails as $item)

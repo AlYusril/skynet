@@ -16,7 +16,7 @@ class PembayaranController extends Controller
      */
     public function index(Request $request)
     {
-        $models = Pembayaran::latest();
+        $models = Pembayaran::orderByRaw("CASE WHEN tanggal_konfirmasi IS NULL THEN 0 ELSE 1 END, tanggal_konfirmasi desc");
         if ($request->filled('q')) {
             $models = $models->whereHas('tagihan', function ($q) {
                 $q->whereHas('member', function ($q) {
@@ -43,7 +43,7 @@ class PembayaranController extends Controller
             }
         }
 
-        $data['models'] = $models->orderBy('tanggal_konfirmasi','desc')->paginate(50);
+        $data['models'] = $models->paginate(settings()->get('app_pagination', '50'));
         $data['title'] = 'Data Pembayaran';
         return view('admin.pembayaran_index', $data);
     }

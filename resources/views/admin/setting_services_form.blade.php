@@ -1,4 +1,4 @@
-@extends('layouts.app_corona',['title' => 'Setting Web | '])
+@extends('layouts.app_corona',['title' => 'Setting Services | '])
 
 @section('content')
 @include('admin.header_setting_landingpage_index')

@@ -20,16 +20,6 @@
     <div class="page-title">{{ $title }}</div>
 </div>
 
-{{-- <div class="row">
-    <div class="col">
-        <div class="card">
-            <div class="card-body">
-                {!! $memberPaketChart->container() !!}
-            </div>
-        </div>
-    </div>
-</div> --}}
-
 <div class="row justify-content-center">
     <div class="col-lg-12">
         <div class="card">   
@@ -139,6 +129,4 @@
         </div>
     </div>
 </div>
-<script src="{{ $memberPaketChart->cdn() }}"></script>
-{{ $memberPaketChart->script() }}
 @endsection
